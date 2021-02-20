@@ -1,32 +1,32 @@
 
-const userInterface = require("./schema/user");
-
 const express = require("express");
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+
 app = express();
 const port = 4000;
 
-const bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(cookieParser());
 
 // Set up MongoDB connection
 const mongoose = require('mongoose');
 const mongooseDB = require('./schema/database');
+const User = require('./schema/user').User;
 
-// Set up Schema
-const userSchema = new mongoose.Schema(userInterface);
-const User = mongoose.model("User", userSchema);
-
-app.get("/ping", (req, res) => {
+app.get("/ping", (_, res) => {
     res.send("pong");
 });
 
 app.post("/login", (req, res) => {
-    res.send("This is the login page");
+    const login = require('./pages/account/login');
+    login(req, res);
 });
 
 app.post("/register", (req, res) => {
-    res.send("This is the register page");
+    const register = require('./pages/account/register');
+    register(req, res);
 });
 
 app.get("/org/[id]", (req, res) => {
