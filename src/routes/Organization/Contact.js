@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
 const Contact = () => {
     const classes = useStyles();
     return (
-        <div className="About">
+        <div className="Contact">
             <Container>
               <div>
                 <h1>Contact Organization</h1>

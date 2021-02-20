@@ -19,9 +19,20 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  tabs: {
     color: 'white',
     textDecoration: 'none'
+  },
+  appBar: {
+    backgroundColor: 'white',
+    boxShadow: 'none',
+    color: 'rgb(31, 32, 36)'
+  },
+  toolBar: {
+    backgroundColor: 'rgb(52, 88, 235)'
+  },
+  root: {
+    
   }
 }))
 
@@ -33,30 +44,29 @@ export default function Routing() {
         <Router>
 
         <div>
-         <AppBar position="static"> 
-          <Toolbar>
+         <AppBar position="static" className={classes.appBar}> 
+          <Toolbar className={classes.toolBar}>
             <Button >
-              <Link className={classes.root} to="/about">Home</Link>
+              <Link className={classes.tabs} to="/">Home</Link>
             </Button>
             <Button>
-              <Link className={classes.root} to="/about">About</Link>
+              <Link className={classes.tabs} to="/about">About</Link>
             </Button>
             <Button>
-              <Link className={classes.root} to="/donate">Donate</Link>
+              <Link className={classes.tabs} to="/donate">Donate</Link>
             </Button>
             <Button>
-              <Link className={classes.root} to="/events">Events</Link>
+              <Link className={classes.tabs} to="/events">Events</Link>
             </Button>
             <Button>
-              <Link className={classes.root} to="/contact">Contact</Link>
+              <Link className={classes.tabs} to="/contact">Contact</Link>
             </Button>
             <Button>
-              <Link className={classes.root} to="/volunteer">Volunteer</Link>
+              <Link className={classes.tabs} to="/volunteer">Volunteer</Link>
             </Button>
           </Toolbar>
-        </AppBar>
 
-          <Switch>
+            <Switch>
           <Route exact path="/">
             <Home />
           </Route>
@@ -76,6 +86,10 @@ export default function Routing() {
             <Contact/>
           </Route>
         </Switch>
+      </AppBar>    
+        
+
+          
       </div>
     </Router>
       

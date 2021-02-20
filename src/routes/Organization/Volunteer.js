@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
 const Volunteer = () => {
     const classes = useStyles();
     return (
-        <div className="About">
+        <div className="Home">
             <Container>
               <div>
                 <h1>Volunteer Opportunities</h1>
