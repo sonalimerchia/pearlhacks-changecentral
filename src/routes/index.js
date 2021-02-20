@@ -19,6 +19,10 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    color: 'white',
+    textDecoration: 'none'
+  }
 }))
 
 export default function Routing() {
@@ -31,23 +35,23 @@ export default function Routing() {
         <div>
          <AppBar position="static"> 
           <Toolbar>
-            <Button>
-              <Link to="/about">Home</Link>
+            <Button >
+              <Link className={classes.root} to="/about">Home</Link>
             </Button>
             <Button>
-              <Link to="/about">About</Link>
+              <Link className={classes.root} to="/about">About</Link>
             </Button>
             <Button>
-              <Link to="/donate">Donate</Link>
+              <Link className={classes.root} to="/donate">Donate</Link>
             </Button>
             <Button>
-              <Link to="/events">Events</Link>
+              <Link className={classes.root} to="/events">Events</Link>
             </Button>
             <Button>
-              <Link to="/contact">Contact</Link>
+              <Link className={classes.root} to="/contact">Contact</Link>
             </Button>
             <Button>
-              <Link to="/volunteer">Volunteer</Link>
+              <Link className={classes.root} to="/volunteer">Volunteer</Link>
             </Button>
           </Toolbar>
         </AppBar>
