@@ -35,14 +35,14 @@ app.get("/me", (req, res) => {
 });
 
 app.get("/orgs", (req, res) => {
-    const viewOrgs = require('./pages/browser/searchOrgs');
-    viewOrgs(req, res);
+    const searchOrgs = require('./pages/browser/searchOrgs');
+    searchOrgs(req, res);
 })
 
-app.post("/delete", (req, res) => {
-    const deleteOrgs = require('./pages/account/clearAllOrgs');
-    deleteOrgs(req, res);
-})
+// app.post("/delete", (req, res) => {
+//     const deleteOrgs = require('./pages/account/clearAllOrgs');
+//     deleteOrgs(req, res);
+// })
 
 app.get("/org/:orgName", (req, res) => {
     const viewOrg = require('./pages/browser/viewOrg');
