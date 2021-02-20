@@ -1,4 +1,4 @@
-const Org = require("../../schema/user").Org;
+const Org = require("../../schema/org").Org;
 const argon2 = require("argon2");
 const cookieName = require("../../constants").cookieName;
 
