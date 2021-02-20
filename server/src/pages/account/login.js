@@ -24,11 +24,17 @@ module.exports = async function (req, res) {
             res.send(user);
             return null;
         } else {
-            res.send("incorrect password");
+            res.send({
+                field: "password", 
+                message: "incorrect password"
+            });
             return null;
         }
     } else {
-        res.send("incorrect email/username");
+        res.send({
+            field: "email/username", 
+            message: "incorrect email/username"
+        });
         return null;
     }
 }

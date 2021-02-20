@@ -6,16 +6,34 @@ module.exports = async function (req, res) {
     console.log("in the register! yay!");
 
     if (!req.body.username) {
-        res.send("Error: must enter a username");
+        res.send({
+            field: "username", 
+            message: "must add username"
+        });
         return null;
     } else if (!req.body.email) {
-        res.send("Error: must enter an email");
+        res.send({
+            field: "email", 
+            message: "must add email"
+        });
         return null;
     } else if (!req.body.password) {
-        res.send("Error: must enter a password")
+        res.send({
+            field: "password", 
+            message: "must add password"
+        });
         return null;
     } else if (req.body.password != req.body.confirmPassword) {
-        res.send("Error: password and confirm password do not match");
+        res.send({
+            field: "confirmPassword", 
+            message: "passwords must match"
+        });
+        return null;
+    } else if (!req.body.name) {
+        res.send({
+            field: "name", 
+            message: "must add name"
+        });
         return null;
     }
 

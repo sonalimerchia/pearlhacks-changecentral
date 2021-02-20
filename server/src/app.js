@@ -29,15 +29,31 @@ app.post("/register", (req, res) => {
     register(req, res);
 });
 
-app.get("/org/[name]", (req, res) => {
-    res.send("This is a page for an org")
+app.get("/me", (req, res) => {
+    const me = require('./pages/account/me');
+    me(req, res);
 });
 
-app.post('/edit/org/[name]' ,(req, res) => {
-    res.send("This is the page you call to save changes to edits to an org");
+app.get("/orgs", (req, res) => {
+    const viewOrgs = require('./pages/browser/searchOrgs');
+    viewOrgs(req, res);
+})
+
+app.post("/delete", (req, res) => {
+    const deleteOrgs = require('./pages/account/clearAllOrgs');
+    deleteOrgs(req, res);
+})
+
+app.get("/org/:orgName", (req, res) => {
+    const viewOrg = require('./pages/browser/viewOrg');
+    viewOrg(req, res);
+});
+
+app.post("/org/:orgName/edit" ,(req, res) => {
+    const editOrg = require('./pages/account/editOrg');
+    editOrg(req, res);
 });
 
 app.listen(port, () => {
     console.log("Server started on port "+ port);
 });
-

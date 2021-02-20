@@ -12,6 +12,11 @@ const orgSchema = {
             contentType:String
         }]
     },
+    location: {
+        country: String, 
+        state: String, 
+        region: String
+    },
     links: {
         donation: String,
         website: String
@@ -41,7 +46,8 @@ const orgSchema = {
             data: Buffer, 
             contentType:String
         }]
-    }]
+    }], 
+    
 }
 
 const org = new mongoose.Schema(orgSchema);
