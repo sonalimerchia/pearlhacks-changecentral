@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,7 +18,15 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const Home = () => {
+    const [data, setData] = useState({})
     const classes = useStyles();
+
+    useEffect(async ()=> {
+        const result = await axios(
+            ''
+        )
+        setData(result.data)
+    })
     return (
         <div className='Home'>
             <Container>
