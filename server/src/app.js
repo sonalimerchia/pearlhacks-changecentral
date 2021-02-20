@@ -13,7 +13,7 @@ app.use(cookieParser());
 // Set up MongoDB connection
 const mongoose = require('mongoose');
 const mongooseDB = require('./schema/database');
-const User = require('./schema/user').User;
+const Org = require('./schema/org').Org;
 
 app.get("/ping", (_, res) => {
     res.send("pong");
@@ -29,11 +29,11 @@ app.post("/register", (req, res) => {
     register(req, res);
 });
 
-app.get("/org/[id]", (req, res) => {
+app.get("/org/[name]", (req, res) => {
     res.send("This is a page for an org")
 });
 
-app.post('/edit/org/[id]' ,(req, res) => {
+app.post('/edit/org/[name]' ,(req, res) => {
     res.send("This is the page you call to save changes to edits to an org");
 });
 

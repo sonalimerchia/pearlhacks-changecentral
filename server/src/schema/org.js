@@ -1,9 +1,10 @@
 let mongoose = require('mongoose');
 
-const userSchema = {
+const orgSchema = {
     email: String, 
     username: String, 
     password: String, 
+    name: String,
     description: {
         text: String, 
         images: [{
@@ -43,8 +44,8 @@ const userSchema = {
     }]
 }
 
-const user = new mongoose.Schema(userSchema);
+const org = new mongoose.Schema(orgSchema);
 module.exports = {
-    UserSchema: userSchema, 
-    User: mongoose.model("User", user)
+    OrgSchema: orgSchema, 
+    Org: mongoose.model("Org", org)
 };

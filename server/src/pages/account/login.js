@@ -1,4 +1,4 @@
-const User = require("../../schema/user").User;
+const Org = require("../../schema/user").Org;
 const argon2 = require("argon2");
 const cookieName = require("../../constants").cookieName;
 
@@ -6,9 +6,9 @@ module.exports = async function (req, res) {
     console.log("in the login! yay!");
     var user;
     if (req.body.username) {
-        user = await User.findOne({username: req.body.username});   
+        user = await Org.findOne({username: req.body.username});   
     } else if (req.body.email) {
-        user = await User.findOne({email: req.body.username});
+        user = await Org.findOne({email: req.body.username});
     }
 
     if (user) {
