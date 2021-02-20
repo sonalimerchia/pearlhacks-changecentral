@@ -11,12 +11,16 @@ import Donate from './Organization/Donate'
 import Events from './Organization/Events'
 import Contact from './Organization/Contact'
 import Volunteer from './Organization/Volunteer'
+import SignUp from './SignUp';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
   tabs: {
@@ -31,9 +35,13 @@ const useStyles = makeStyles((theme) => ({
   toolBar: {
     backgroundColor: 'rgb(52, 88, 235)'
   },
-  root: {
-    
-  }
+  menuButton: {
+    marginRight: 0,
+    color: 'white',
+    textDecoration: 'none',
+    right: '0px'
+  },
+  
 }))
 
 export default function Routing() {
@@ -47,7 +55,7 @@ export default function Routing() {
          <AppBar position="static" className={classes.appBar}> 
           <Toolbar className={classes.toolBar}>
             <Button >
-              <Link className={classes.tabs} to="/">Home</Link>
+              <Link className={classes.tabs} style={{fontSize: '1.2rem', fontWeight: 'bold'}} to="/">Change Central</Link>
             </Button>
             <Button>
               <Link className={classes.tabs} to="/about">About</Link>
@@ -64,6 +72,9 @@ export default function Routing() {
             <Button>
               <Link className={classes.tabs} to="/volunteer">Volunteer</Link>
             </Button>
+            <IconButton className={classes.menuButton}>
+            <Link to="/signup"><AccountCircle className={classes.menuButton}/></Link>
+            </IconButton>
           </Toolbar>
 
             <Switch>
@@ -84,6 +95,9 @@ export default function Routing() {
           </Route>
           <Route path="/contact">
             <Contact/>
+          </Route>
+          <Route path="/signup">
+            <SignUp/>
           </Route>
         </Switch>
       </AppBar>    
