@@ -21,12 +21,27 @@ const Home = () => {
     const [data, setData] = useState({})
     const classes = useStyles();
 
-    useEffect(async ()=> {
-        const result = await axios(
-            'http://localhost:4000/ '
-        )
-        setData(result.data)
-    })
+    useEffect(()=> {
+        var config = {
+          method: 'get',
+          url: 'http://localhost:4000/',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
+  
+        axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          setData(JSON.stringify(response.data))
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, [])
+
+
     console.log(data)
     return (
         <div className='Home'>
