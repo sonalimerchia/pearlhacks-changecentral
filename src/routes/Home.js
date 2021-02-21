@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
@@ -23,10 +23,11 @@ const Home = () => {
 
     useEffect(async ()=> {
         const result = await axios(
-            ''
+            'http://localhost:4000/ '
         )
         setData(result.data)
     })
+    console.log(data)
     return (
         <div className='Home'>
             <Container>

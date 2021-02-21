@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+import Container from '@material-ui/core/Container'
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -11,143 +14,220 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+
+  const initialData = {
+      email: '',
+      username: '',
+      password: '', 
+      name: '',
+      description: {
+        text: '', 
+        images: [{}]
+    },
+    links: {
+        donation: '',
+        website: ''
+    },
+    contact: {
+        email: '',
+        phone: ''
+    }, 
+    volunteer: {
+        roles: [{
+            title: '', 
+            description: ''
+        }]
+    },
+    events: [{
+        date: '', 
+        description: '', 
+        images: [{
+            data: '', 
+            contentType:''
+        }]
+    }], 
+    activities: [{
+        day: '', 
+        description: '', 
+        images: [{
+            data: '', 
+            contentType:''
+        }]
+    }]
+    }
+
   const SetUp = () => {
-      const classes = useStyles();
+    const classes = useStyles();
+
+    const [data, setData] = useState(initialData)
+
+    // useEffect(()=> {
+    //   setData(initialData)
+    // })
+
+    const handleChange = (event) => {
+      setData({...data, [event.target.name]: event.target.value})
+    }
+
+    const handleSubmit = () => {
+      axios.post('http://localhost:4000/register', {
+        data
+      })
+      .then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
+    }
+
+    // const handleChangeLinks = (event) => {
+    //   // console.log(event.target.name)
+    //   let links = data.links
+    //   links[event.target.name] = event.target.value
+    //   data.links[event.target.name] = event.target.value
+    //   setData({...data.links, [event.target.name]: event.target.value})
+    // }
+    
 
       return(
+        <Container>
+          <h1>Register your organization</h1>
           <form className={classes.root}>
+            <div>
               <div>
-        <TextField required id="standard-required" label="Required" defaultValue="Hello World" />
-        <TextField disabled id="standard-disabled" label="Disabled" defaultValue="Hello World" />
-        <TextField
-          id="standard-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-        />
-        <TextField
-          id="standard-read-only-input"
-          label="Read Only"
-          defaultValue="Hello World"
-          InputProps={{
-            readOnly: true,
-          }}
-        />
-        <TextField
-          id="standard-number"
-          label="Number"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <TextField id="standard-search" label="Search field" type="search" />
-        <TextField
-          id="standard-helperText"
-          label="Helper text"
-          defaultValue="Default Value"
-          helperText="Some important text"
-        />
-      </div>
-      <div>
-        <TextField
-          required
-          id="filled-required"
-          label="Required"
-          defaultValue="Hello World"
-          variant="filled"
-        />
-        <TextField
-          disabled
-          id="filled-disabled"
-          label="Disabled"
-          defaultValue="Hello World"
-          variant="filled"
-        />
-        <TextField
-          id="filled-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          variant="filled"
-        />
-        <TextField
-          id="filled-read-only-input"
-          label="Read Only"
-          defaultValue="Hello World"
-          InputProps={{
-            readOnly: true,
-          }}
-          variant="filled"
-        />
-        <TextField
-          id="filled-number"
-          label="Number"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="filled"
-        />
-        <TextField id="filled-search" label="Search field" type="search" variant="filled" />
-        <TextField
-          id="filled-helperText"
-          label="Helper text"
-          defaultValue="Default Value"
-          helperText="Some important text"
-          variant="filled"
-        />
-      </div>
-      <div>
-        <TextField
-          required
-          id="outlined-required"
-          label="Required"
-          defaultValue="Hello World"
-          variant="outlined"
-        />
-        <TextField
-          disabled
-          id="outlined-disabled"
-          label="Disabled"
-          defaultValue="Hello World"
-          variant="outlined"
-        />
-        <TextField
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          variant="outlined"
-        />
-        <TextField
-          id="outlined-read-only-input"
-          label="Read Only"
-          defaultValue="Hello World"
-          InputProps={{
-            readOnly: true,
-          }}
-          variant="outlined"
-        />
-        <TextField
-          id="outlined-number"
-          label="Number"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />
-        <TextField id="outlined-search" label="Search field" type="search" variant="outlined" />
-        <TextField
-          id="outlined-helperText"
-          label="Helper text"
-          defaultValue="Default Value"
-          helperText="Some important text"
-          variant="outlined"
-        />
-      </div>
+                <h3>Basic Information</h3>
+                <TextField 
+                required 
+                id="standard-required" 
+                label="Organization Name" 
+                name="name" 
+                onChange={handleChange}/>
+              <TextField 
+              required 
+              id="standard-required" label="Email"
+              name="email" 
+              onChange={handleChange}/>
+              <TextField 
+              required 
+              id="standard-required" 
+              label="Username" 
+              name="username" 
+              onChange={handleChange}/>
+              <TextField
+                id="standard-password-input"
+                label="Password"
+                type="password"
+                name="password" 
+                onChange={handleChange}
+              />
+              <TextField
+                id="standard-multiline-flexible"
+                label="Description"
+                multiline
+                rowsMax={4}
+                name="description" 
+                onChange={handleChange}
+              />
+              </div>
+              <div>
+                <h3>Links and contact information</h3>
+                <TextField id="standard-input" 
+                label="Donation Link" 
+                name="donation"
+                onChange={handleChange}/>
+                <TextField id="standard-input" label="Website" 
+                name="website"
+                onChange={handleChange}/>
+                <TextField id="standard-input" label="Contact Email" 
+                name="contactEmail"
+                onChange={handleChange}/>
+                <TextField id="standard-input" label="Contact Phone Number" 
+                name="contactPhone"
+                onChange={handleChange}/>
+              </div>
+              <div>
+                <h3>Events and Activities information</h3>
+                
+                <div>
+                  <h5>Event 1</h5>
+                    <TextField 
+                    id="date"
+                    // label="Date"
+                    type="date"
+                    helperText="Date"
+                    style={{marginTop:'1.5rem'}}
+                    name="eventDate"
+                    onChange={handleChange}
+                    />
+                    <TextField
+                    id="standard-multiline-flexible"
+                    label="Description"
+                    multiline
+                    rowsMax={4}
+                    name="eventDescription"
+                    onChange={handleChange}
+                  />
+                </div>
+                  <h5>Event 2</h5>
+                  <div>
+                  <TextField 
+                  id="date"
+                  // label="Date"
+                  type="date"
+                  helperText="Date"
+                  style={{marginTop:'1.5rem'}}
+                  />
+                  <TextField
+                  id="standard-multiline-flexible"
+                  label="Description"
+                  multiline
+                  rowsMax={4}
+                />
+                </div>
+                <h5>Activity 1</h5>
+                <div>
+                <TextField 
+                id="date"
+                // label="Date"
+                type="date"
+                helperText="Date"
+                style={{marginTop:'1.5rem'}}
+                name="activityDate"
+                onChange={handleChange}
+                />
+                <TextField
+                id="standard-multiline-flexible"
+                label="Description"
+                multiline
+                rowsMax={4}
+                name="activityDescription"
+                onChange={handleChange}
+              />
+                </div>
+                <h5>Activity 2</h5>
+                <div>
+                <TextField 
+                id="date"
+                // label="Date"
+                type="date"
+                helperText="Date"
+                style={{marginTop:'1.5rem'}}
+                />
+                <TextField
+                id="standard-multiline-flexible"
+                label="Description"
+                multiline
+                rowsMax={4}
+              />
+                </div>
+              </div>
+            </div>
+            <Button variant="contained" color="primary" onClick={handleSubmit}>
+              Register
+            </Button>
           </form>
+        </Container>
+          
       )
   }
 
