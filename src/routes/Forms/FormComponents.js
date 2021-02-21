@@ -28,6 +28,22 @@ export const InputField = (props) => {
   );
 }
 
+export const ImageField = (props) => {
+  const style = {
+    border:'none',
+    borderBottom: '2px solid #808080',
+    padding: '10px 10px',
+    outline: 'none'
+  }
+  
+  return (
+    <FormControl style={{width:'60%', margin: "10px"}} isInvalid={!!props.error}>
+      <FormLabel htmlFor={props.name}>{props.label}</FormLabel>
+      <Field type="file" name="imageUpload" placeholder="Upload Images Here!" />
+    </FormControl>
+  );
+}
+
 export const toErrorMap = (errors) => {
   var errorMap = {}
   if (errors) {
