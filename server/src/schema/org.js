@@ -32,6 +32,7 @@ const orgSchema = {
         }]
     },
     events: [{
+        name: String,
         date: Date, 
         description: String, 
         images: [{
@@ -40,6 +41,7 @@ const orgSchema = {
         }]
     }], 
     activities: [{
+        name: String,
         day: String, 
         description: String, 
         images: [{

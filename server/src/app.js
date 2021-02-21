@@ -14,6 +14,7 @@ app.use(cookieParser());
 const mongoose = require('mongoose');
 const mongooseDB = require('./schema/database');
 const Org = require('./schema/org').Org;
+const PasswordReset = require('./schema/passwordReset').PasswordReset;
 
 app.get("/ping", (_, res) => {
     res.send("pong");
@@ -34,24 +35,29 @@ app.get("/me", (req, res) => {
     me(req, res);
 });
 
+app.post("/org/:orgName/edit" ,(req, res) => {
+    const editOrg = require('./pages/account/editOrg');
+    editOrg(req, res);
+});
+
+app.post("/forgot-password", (req, res) => {
+    const forgotPassword = require('./pages/account/forgotPassword').forgotPassword;
+    forgotPassword(req, res);
+});
+
+app.post("/change-password/:token", (req, res) => {
+    const forgotPassword = require('./pages/account/forgotPassword').resetPassword;
+    forgotPassword(req, res);
+})
+
 app.get("/orgs", (req, res) => {
     const searchOrgs = require('./pages/browser/searchOrgs');
     searchOrgs(req, res);
 })
 
-// app.post("/delete", (req, res) => {
-//     const deleteOrgs = require('./pages/account/clearAllOrgs');
-//     deleteOrgs(req, res);
-// })
-
 app.get("/org/:orgName", (req, res) => {
     const viewOrg = require('./pages/browser/viewOrg');
     viewOrg(req, res);
-});
-
-app.post("/org/:orgName/edit" ,(req, res) => {
-    const editOrg = require('./pages/account/editOrg');
-    editOrg(req, res);
 });
 
 app.listen(port, () => {

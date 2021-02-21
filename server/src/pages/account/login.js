@@ -1,6 +1,6 @@
 const Org = require("../../schema/org").Org;
 const argon2 = require("argon2");
-const cookieName = require("../../constants").cookieName;
+const cookieName = require("../../constants").COOKIE_NAME;
 
 module.exports = async function (req, res) {
     console.log("in the login! yay!");

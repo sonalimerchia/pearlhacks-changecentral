@@ -1,5 +1,5 @@
 const Org = require("../../schema/org").Org;
-const cookieName = require("../../constants").cookieName;
+const cookieName = require("../../constants").COOKIE_NAME;
 
 module.exports = async function (req, res) {
     console.log("finding out identity! yay!");

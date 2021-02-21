@@ -1,6 +1,5 @@
 const Org = require("../../schema/org").Org;
 const argon2 = require("argon2");
-const cookieName = require("../../constants").cookieName;
 
 module.exports = async function (req, res) {
     console.log("in the register! yay!");
@@ -55,6 +54,7 @@ module.exports = async function (req, res) {
     const user = new Org({
         username: req.body.username, 
         email: req.body.email,
+        name: req.body.name,
         password: await argon2.hash(req.body.password)
     });
 
