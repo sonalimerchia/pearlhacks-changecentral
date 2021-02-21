@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
     card: {
         maxWidth: 345,
+        minWidth: 300,
         width: '100%'
     }, 
     media: {
@@ -44,14 +45,14 @@ const Activities = (props) => {
     return (
         <div className={`Activities`, classes.root}>
             <OrgBar name={props.name}/>
-            { !(info?.volunteer.roles) ? <h2>No Activities Posted</h2> :(
+            { !(info?.activities) ? <h2>Loading Activities...</h2> :(
               <>
                 <h2>Activities</h2>
                 <Grid container className={classes.grid} spacing={3}>
-                    {info.activities.map((element, i) => {
+                    {info.activities.map((element) => {
                         return (
-                    <Grid item xs>
-                        <Card className={classes.card}>
+                    <Grid item xs className={classes.card}>
+                        <Card>
                             <CardMedia
                               className={classes.media}
                               image={logo}

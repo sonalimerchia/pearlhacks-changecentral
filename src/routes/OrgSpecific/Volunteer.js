@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
     },
     card: {
         maxWidth: 345,
-        width: '100%'
+        width: '100%',
+        minWidth: 300
     }, 
     media: {
         height: 140
@@ -46,10 +47,10 @@ const Volunteer = (props) => {
               <>
                 <h2>Volunteering Opportunities</h2>
                 <Grid container className={classes.grid} spacing={3}>
-                    {info.volunteer.roles.map((element, i) => {
+                    {info.volunteer.roles.map((element) => {
                         return (
-                        <Grid item xs>
-                            <Card className={classes.card}>
+                        <Grid item xs className={classes.card}>
+                            <Card>
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
                                 {element.title}

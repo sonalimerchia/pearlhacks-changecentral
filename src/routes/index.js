@@ -60,16 +60,10 @@ export default function Routing() {
               <Link className={classes.tabs} style={{fontSize: '1.2rem', fontWeight: 'bold'}} to="/">Change Central</Link>
             </Button>
             <Button>
-              <Link className={classes.tabs} to="/about">About</Link>
-            </Button>
-            <Button>
               <Link className={classes.tabs} to="/donate">Donate</Link>
             </Button>
             <Button>
               <Link className={classes.tabs} to="/events">Events</Link>
-            </Button>
-            <Button>
-              <Link className={classes.tabs} to="/contact">Contact</Link>
             </Button>
             <Button>
               <Link className={classes.tabs} to="/volunteer">Volunteer</Link>
@@ -77,9 +71,12 @@ export default function Routing() {
             <Button>
               <Link className={classes.tabs} to="/activities">Activities</Link>
             </Button>
-            <IconButton className={classes.menuButton}>
-            <Link to="/register"><AccountCircle className={classes.menuButton}/></Link>
-            </IconButton>
+            <Button className={classes.menuButton}>
+              <Link to="/register" className={classes.tabs}>Register</Link>
+            </Button>
+            <Button className={classes.menuButton}>
+              <Link to="/login" className={classes.tabs}>Login</Link>
+            </Button>
           </Toolbar>
 
             <Switch>
