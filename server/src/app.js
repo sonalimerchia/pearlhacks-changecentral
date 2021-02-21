@@ -2,6 +2,8 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require("cors");
+const frontendURL = require("./constants").FRONTEND_URL;
 
 app = express();
 const port = 4000;
@@ -9,6 +11,7 @@ const port = 4000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
+app.use(cors());
 
 // Set up MongoDB connection
 const mongoose = require('mongoose');
@@ -26,6 +29,7 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
+    console.log("hello");
     const register = require('./pages/account/register');
     register(req, res);
 });
