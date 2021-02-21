@@ -27,7 +27,9 @@ const Volunteer = (props) => {
     return (
         <div className={`Events`, classes.root}>
             <OrgBar name={props.name}/>
-        
+            {   
+
+            }
         </div>
     )
 }

@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import {getOrgInfo} from '../../utils/getOrgInfo';
 import { makeStyles } from '@material-ui/core/styles';
-import logo from '../../logo.svg';
 import OrgBar from './OrgBar';
 
 const useStyles = makeStyles((theme) => ({

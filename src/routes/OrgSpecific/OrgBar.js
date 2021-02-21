@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -16,8 +15,9 @@ const useStyles = makeStyles((theme) => ({
     },
     toolBar: {
       backgroundColor: 'rgb(52, 88, 235)',
-      width: '90%',
-      margin: '0% 5% 0% 5%'
+      width: '91.5%',
+      padding: '0.3rem',
+      margin: '0% 5%'
     },
     menuButton: {
       color: 'white',
@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
         padding: '0.3rem',
         height: '100%',
         width: '90%',
-        margin: '0% 5% 0% 5%'
+        margin: '0% 5% 0% 5%', 
+        borderRadius: "0px 0px 0px 0px"
     }
   }))
 
@@ -53,23 +54,33 @@ const OrgBar = (props) => {
                         <img src={logo} alt="react Logo" width='30%'/>
             </Grid>
         </Paper>
-        <Grid justifyContent='auto' className={classes.toolBar}>
-            <Button item xs>
-              <Link className={classes.tabs} to={"/org/"+props.name}>About</Link>
-            </Button>
-            <Button item xs>
-              <Link className={classes.tabs} to={"/donate/"+props.name}>Donate</Link>
-            </Button>
-            <Button item xs>
-              <Link className={classes.tabs} to={"/events/"+props.name}>Events</Link>
-            </Button>
-            <Button item xs>
-              <Link className={classes.tabs} to={"/contact/"+props.name}>Contact</Link>
-            </Button>
-            <Button item xs>
-              <Link className={classes.tabs} to={"/volunteer/"+props.name}>Volunteer</Link>
+        <Grid container spacing={2} className={classes.toolBar}>
+          <Grid item xs>
+            <Button>
+              <Link className={classes.tabs} to={`/org/about/${props.name}`}>About</Link>
             </Button>
           </Grid>
+          <Grid item xs>
+            <Button>
+              <Link className={classes.tabs} to={`/org/donate/${props.name}`}>Donate</Link>
+            </Button>
+          </Grid>
+          <Grid item xs>
+            <Button>
+              <Link className={classes.tabs} to={`/org/events/${props.name}`}>Events</Link>
+            </Button>
+          </Grid>
+          <Grid item xs>
+            <Button>
+              <Link className={classes.tabs} to={`/org/contact/${props.name}`}>Contact</Link>
+            </Button>
+          </Grid>
+          <Grid item xs>
+            <Button>
+              <Link className={classes.tabs} to={`/org/volunteer/${props.name}`}>Volunteer</Link>
+            </Button>
+          </Grid>
+        </Grid>
     </Box>
     )
 }

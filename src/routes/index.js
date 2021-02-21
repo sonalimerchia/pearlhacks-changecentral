@@ -19,6 +19,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Login from './Forms/Login';
 // import InputBase from '@material-ui/core/InputBase';
 // import SearchIcon from '@material-ui/icons/Search';
 
@@ -81,25 +82,13 @@ export default function Routing() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/donate">
-            <Donate />
-          </Route>
-          <Route path="/events">
-            <Events />
-          </Route>
-          <Route path="/volunteer">
-            <Volunteer />
-          </Route>
-          <Route path="/contact">
-            <Contact/>
-          </Route>
           <Route path="/register">
-            <Register/>
+            <Register />
           </Route>
-          <Route path="/org/:orgName" children={<Child />} />
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/org/:viewType/:orgName" children={<Child />} />
         </Switch>
       </AppBar>    
 
@@ -110,9 +99,13 @@ export default function Routing() {
 }
 
 function Child() {
-  let { orgName } = useParams();
+  let { orgName, viewType } = useParams();
 
-  return (
-    <About name={orgName} />
-  );
+  switch(viewType){
+    case "about": return <About name={orgName}/>
+    case "donate": return <Donate name={orgName}/>
+    case "events": return <Events name={orgName}/>
+    case "contact": return <Contact name={orgName}/>
+    case "volunteer": return <Volunteer name={orgName}/>
+  }
 }

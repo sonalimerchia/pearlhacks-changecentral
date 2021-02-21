@@ -20,7 +20,7 @@ module.exports = async function (req, res) {
         return null;
     }
 
-    if (org.name != req.params.orgName) {
+    if (org._id != id) {
         res.send({
             error: "Do not have access to this organization"
         });
@@ -32,7 +32,7 @@ module.exports = async function (req, res) {
             org[key] = req.body[key];
         }
     }
-    
+    console.log(org);
     
     const updatedOrg = await Org.updateOne({_id: id}, org, (error) => {
         console.log(error);

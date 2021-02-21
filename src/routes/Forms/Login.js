@@ -5,6 +5,7 @@ import {Formik} from "formik";
 import {InputField, toErrorMap} from "./FormComponents";
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import {getOrgInfo} from '../../utils/getOrgInfo';
 
 const Login = (props) => {
   const [orgName, setOrgName] = useState("");
@@ -42,7 +43,7 @@ const Login = (props) => {
           const errors = await asyncValidate(values);
           setErrors(toErrorMap(errors));
           if (!errors) {
-            const org = await getOrg(values);
+            const org = await getOrgInfo(values.name);
             setOrgName(org.name);
           }
         }}
