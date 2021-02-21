@@ -50,8 +50,8 @@ app.post("/forgot-password", (req, res) => {
 });
 
 app.post("/change-password/:token", (req, res) => {
-    const forgotPassword = require('./pages/account/forgotPassword').resetPassword;
-    forgotPassword(req, res);
+    const changePassword = require('./pages/account/forgotPassword').resetPassword;
+    changePassword(req, res);
 })
 
 app.get("/orgs", (req, res) => {
@@ -63,6 +63,19 @@ app.get("/org/:orgName", (req, res) => {
     const viewOrg = require('./pages/browser/viewOrg');
     viewOrg(req, res);
 });
+
+////DEV/////
+
+app.post("/delete/orgs", (req, res) => {
+    const deleteAll = require("./pages/account/clearAllOrgs");
+    deleteAll(req, res);
+});
+
+app.post("/list/passwords", (req, res) => {
+    const list = require("./pages/browser/listOngoingResets");
+    list(req, res);
+});
+
 
 app.listen(port, () => {
     console.log("Server started on port "+ port);

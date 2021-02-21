@@ -4,6 +4,8 @@ module.exports = async function (email, emailContent) {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
 
+    console.log(emailContent);
+
     let testAccount = await nodemailer.createTestAccount();
 
     // create reusable transporter object using the default SMTP transport
@@ -15,7 +17,7 @@ module.exports = async function (email, emailContent) {
         auth: {
         user: testAccount.user, // generated ethereal user
         pass: testAccount.pass, // generated ethereal password
-        },
+        }, 
     });
 
     // send mail with defined transport object
