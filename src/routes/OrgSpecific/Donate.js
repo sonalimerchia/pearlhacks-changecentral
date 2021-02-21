@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {getOrgInfo} from '../../utils/getOrgInfo';
 import { makeStyles } from '@material-ui/core/styles';
 import OrgBar from './OrgBar';
+import {Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,12 +23,16 @@ const Donate = (props) => {
         const response = await getOrgInfo(props.name);
         const result = response.data;
         setInfo(result);
+        if (result?.links.donation) {
+            window.location.href = result.links.donation;
+        }
     },[]);
 
     return (
         <div className={`Donate`, classes.root}>
             <OrgBar name={props.name}/>
-        
+            {info?.links.donation ? <h2>Redirecting...</h2>
+                : <h2>No donation link available</h2>}
         </div>
     )
 }

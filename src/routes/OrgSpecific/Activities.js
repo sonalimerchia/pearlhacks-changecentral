@@ -4,8 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import OrgBar from './OrgBar';
+import logo from '../../logo.svg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-const Volunteer = (props) => {
+const Activities = (props) => {
     const classes = useStyles();
     const [info, setInfo] = useState();
 
@@ -40,25 +42,33 @@ const Volunteer = (props) => {
     },[]);
 
     return (
-        <div className={`Events`, classes.root}>
+        <div className={`Activities`, classes.root}>
             <OrgBar name={props.name}/>
-            { !(info?.volunteer.roles) ? <h2>No Volunteering Opportunities Posted</h2> :(
+            { !(info?.volunteer.roles) ? <h2>No Activities Posted</h2> :(
               <>
-                <h2>Volunteering Opportunities</h2>
+                <h2>Activities</h2>
                 <Grid container className={classes.grid} spacing={3}>
-                    {info.volunteer.roles.map((element, i) => {
+                    {info.activities.map((element, i) => {
                         return (
-                        <Grid item xs>
-                            <Card className={classes.card}>
+                    <Grid item xs>
+                        <Card className={classes.card}>
+                            <CardMedia
+                              className={classes.media}
+                              image={logo}
+                              title="Activity Image"
+                            />
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                {element.title}
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                {element.description}
-                                </Typography>
+                              <Typography gutterBottom variant="h5" component="h2">
+                                {element.name}
+                              </Typography>
+                              <Typography gutterBottom variant="h6" component="h4">
+                                {element.day}
+                              </Typography>
+                              <Typography variant="body2" color="textSecondary" component="p">
+                               {element.description}
+                              </Typography>
                             </CardContent>
-                            </Card>
+                        </Card>
                         </Grid>
                       )
                     })}
@@ -69,4 +79,4 @@ const Volunteer = (props) => {
     )
 }
 
-export default Volunteer;
+export default Activities;

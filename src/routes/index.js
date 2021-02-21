@@ -13,6 +13,7 @@ import Events from './OrgSpecific/Events'
 import Contact from './OrgSpecific/Contact'
 import Volunteer from './OrgSpecific/Volunteer'
 import Register from './Forms/Register';
+import Activities from './OrgSpecific/Activities';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -73,6 +74,9 @@ export default function Routing() {
             <Button>
               <Link className={classes.tabs} to="/volunteer">Volunteer</Link>
             </Button>
+            <Button>
+              <Link className={classes.tabs} to="/activities">Activities</Link>
+            </Button>
             <IconButton className={classes.menuButton}>
             <Link to="/register"><AccountCircle className={classes.menuButton}/></Link>
             </IconButton>
@@ -107,5 +111,6 @@ function Child() {
     case "events": return <Events name={orgName}/>
     case "contact": return <Contact name={orgName}/>
     case "volunteer": return <Volunteer name={orgName}/>
+    case "activities": return <Activities name={orgName} />
   }
 }

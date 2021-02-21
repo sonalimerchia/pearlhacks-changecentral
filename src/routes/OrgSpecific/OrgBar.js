@@ -72,12 +72,17 @@ const OrgBar = (props) => {
           </Grid>
           <Grid item xs>
             <Button>
-              <Link className={classes.tabs} to={`/org/contact/${props.name}`}>Contact</Link>
+              <Link className={classes.tabs} to={`/org/activities/${props.name}`}>Activities</Link>
             </Button>
           </Grid>
           <Grid item xs>
             <Button>
               <Link className={classes.tabs} to={`/org/volunteer/${props.name}`}>Volunteer</Link>
+            </Button>
+          </Grid>
+          <Grid item xs>
+            <Button>
+              <Link className={classes.tabs} to={`/org/contact/${props.name}`}>Contact</Link>
             </Button>
           </Grid>
         </Grid>
