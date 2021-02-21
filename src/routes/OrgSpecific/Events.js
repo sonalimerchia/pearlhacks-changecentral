@@ -52,7 +52,6 @@ const Events = (props) => {
             <OrgBar name={props.name}/>
             { !(info?.events) ? <h2>Loading Events...</h2> :(
               <>
-              {console.log(info.events)}
                 <h2>Events</h2>
                 <Grid container className={classes.grid} spacing={3}>
                     {info.events.map((element) => {

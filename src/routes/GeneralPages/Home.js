@@ -1,9 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios';
+import {getAllOrgs} from "../../utils/getOrgInfo";
+import { Link } from "react-router-dom";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import logo from '../../logo.svg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,35 +19,49 @@ const useStyles = makeStyles((theme) => ({
       paper: {
         height: 140,
         width: 100,
+      },
+      card: {
+          maxWidth: 345,
+          minWidth: 300,
+          width: '100%'
+      }, 
+      media: {
+          height: 140
+      }, 
+      link: {
+        textDecoration: 'none', 
+        color: 'rgb(52, 88, 235)'
       }
   }));
 
 const Home = () => {
-    const [data, setData] = useState({})
     const classes = useStyles();
+    const [info, setInfo] = useState({});
+    const [orgCards, setOrgs] = useState([]);
 
-    useEffect(()=> {
-        var config = {
-          method: 'get',
-          url: 'http://localhost:4000/',
-          headers: { 
-            'Content-Type': 'application/json'
-          },
-          data : data
-        };
-  
-        axios(config)
-        .then(function (response) {
-          console.log(JSON.stringify(response.data));
-          setData(JSON.stringify(response.data))
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    useEffect(async () => {
+      const response = await getAllOrgs();
+      const result = response.data;
+      console.log(response);
+      setInfo(result);
+      mapOrgs(result)
     }, [])
 
+    const mapOrgs = (result) => {
+      var orgs = [];
+      console.log('infoType:' ,typeof(result));
+      var i = 0;
+      while (result[i]) {
+        const element = result[i];
+        orgs.push({
+          name: element.name, 
+          description: element.description.text
+        })
+        i++;
+      }
+      setOrgs(orgs);
+    }
 
-    console.log(data)
     return (
         <div className='Home'>
             <Container>
@@ -51,19 +70,35 @@ const Home = () => {
                 <div>
                     <p>Welcome to Change Central! Let us be your one-stop-shop for nonprofits, charities, and social activist organizations to spread awareness, collect donations, and search for volunteers. Search for specific organizations, or browse organizations below to find out how to volunteer, donate, or attend events. </p>
                 </div>
-                <h2>Our Organizations</h2>
-                <Grid container className={classes.root} spacing={2}>
-                    <Grid item xs={12}>
-                        <Grid container justify="center" spacing={2}>
-                        {[0, 1, 2].map((value) => (
-                            <Grid key={value} item>
-                            <Paper className={classes.paper} />
-                            </Grid>
-                        ))}
-                        </Grid>
+                { !(info) ? <h2>Loading Orgs...</h2> :(
+                  <>
+                    <h2>Our Organizations</h2>
+                    <Grid container className={classes.grid} spacing={3}>
+                      {orgCards.map((element) => {
+                        return (<Grid item xs className={classes.card}>
+                            <Card>
+                              <Link className={classes.link} to={"/org/about/"+element.name}>
+                                <CardMedia
+                                className={classes.media}
+                                image={logo}
+                                title="Org Image"
+                                />
+                                <CardContent>
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    {element.name}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                {element.description}
+                                </Typography>
+                                </CardContent>
+                              </Link>
+                            </Card>
+                        </Grid>)
+                      })}
                     </Grid>
-                </Grid>
-            </div>  
+                  </>
+                )}
+              </div>  
             </Container>
         </div>
     )
