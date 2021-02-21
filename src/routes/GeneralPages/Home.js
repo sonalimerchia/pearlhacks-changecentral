@@ -8,7 +8,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import logo from '../../logo.svg';
+import pic1 from '../../images/cartoonroads.jpg';
+import pic2 from '../../images/activism.jpg';
+import pic3 from '../../images/children.jpg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,6 +36,14 @@ const useStyles = makeStyles((theme) => ({
       }
   }));
 
+  const getImage = (i) => {
+    if (i % 3 == 0) {
+        return pic1;
+    } else if (i % 3 == 1) {
+        return pic2;
+    } else return pic3;
+}
+
 const Home = () => {
     const classes = useStyles();
     const [info, setInfo] = useState({});
@@ -49,7 +59,6 @@ const Home = () => {
 
     const mapOrgs = (result) => {
       var orgs = [];
-      console.log('infoType:' ,typeof(result));
       var i = 0;
       while (result[i]) {
         const element = result[i];
@@ -74,13 +83,13 @@ const Home = () => {
                   <>
                     <h2>Our Organizations</h2>
                     <Grid container className={classes.grid} spacing={3}>
-                      {orgCards.map((element) => {
+                      {orgCards.map((element, i) => {
                         return (<Grid item xs className={classes.card}>
                             <Card>
                               <Link className={classes.link} to={"/org/about/"+element.name}>
                                 <CardMedia
                                 className={classes.media}
-                                image={logo}
+                                image={getImage(i)}
                                 title="Org Image"
                                 />
                                 <CardContent>

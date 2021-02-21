@@ -7,7 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import OrgBar from './OrgBar';
-import logo from '../../logo.svg';
+import pic1 from '../../images/activism.jpg';
+import pic2 from '../../images/children.jpg';
+import pic3 from '../../images/cartoonroads.jpg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
+const getImage = (i) => {
+    if (i % 3 == 0) {
+        return pic1;
+    } else if (i % 3 == 1) {
+        return pic2;
+    } else return pic3;
+}
+
 const getPrettyDate = (date) => {
     const dateObj = new Date(date);
     return dateObj.toUTCString();
@@ -54,13 +64,13 @@ const Events = (props) => {
               <>
                 <h2>Events</h2>
                 <Grid container className={classes.grid} spacing={3}>
-                    {info.events.map((element) => {
+                    {info.events.map((element, i) => {
                         return (
                         <Grid item xs className={classes.card}>
                             <Card>
                                 <CardMedia
                                 className={classes.media}
-                                image={logo}
+                                image={getImage(i)}
                                 title="Activity Image"
                                 />
                                 <CardContent>

@@ -6,7 +6,9 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Link } from "react-router-dom";
 import {getOrgInfo} from '../../utils/getOrgInfo';
-import logo from '../../logo.svg';
+import pic1 from '../../images/activism.jpg';
+import pic2 from '../../images/cartoonroads.jpg';
+import pic3 from '../../images/charity.jpg';
 
 const useStyles = makeStyles((theme) => ({
     tabs: {
@@ -48,10 +50,16 @@ const OrgBar = (props) => {
     <Box justifyContent='center'>
       <h1>{props.name}</h1>
         <Paper className={classes.paper}>
-            <Grid>
-                        <img src={logo} alt="react Logo" width='30%'/>
-                        <img src={logo} alt="react Logo" width='30%'/>
-                        <img src={logo} alt="react Logo" width='30%'/>
+            <Grid container>
+              <Grid item xs>
+                <img src={pic1} alt="activism" width='100%' height='100%'/>
+              </Grid>
+              <Grid item xs>
+              <img src={pic2} alt="cartoonRoads" width='100%' height='100%'/>
+              </Grid>
+              <Grid item xs>
+              <img src={pic3} alt="charity" width='100%' height='100%'/>
+              </Grid>
             </Grid>
         </Paper>
         <Grid container spacing={2} className={classes.toolBar}>
@@ -78,11 +86,6 @@ const OrgBar = (props) => {
           <Grid item xs>
             <Button>
               <Link className={classes.tabs} to={`/org/volunteer/${props.name}`}>Volunteer</Link>
-            </Button>
-          </Grid>
-          <Grid item xs>
-            <Button>
-              <Link className={classes.tabs} to={`/org/contact/${props.name}`}>Contact</Link>
             </Button>
           </Grid>
         </Grid>

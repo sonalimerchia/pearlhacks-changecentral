@@ -10,7 +10,6 @@ import Home from './GeneralPages/Home'
 import About from './OrgSpecific/About'
 import Donate from './OrgSpecific/Donate'
 import Events from './OrgSpecific/Events'
-import Contact from './OrgSpecific/Contact'
 import Volunteer from './OrgSpecific/Volunteer'
 import Register from './Forms/Register';
 import Activities from './OrgSpecific/Activities';
@@ -111,7 +110,6 @@ function Child() {
     case "about": return <About name={orgName}/>
     case "donate": return <Donate name={orgName}/>
     case "events": return <Events name={orgName}/>
-    case "contact": return <Contact name={orgName}/>
     case "volunteer": return <Volunteer name={orgName}/>
     case "activities": return <Activities name={orgName} />
   }
