@@ -3,19 +3,19 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link, 
+  useParams
 } from "react-router-dom";
-import Home from './Home'
-import About from './Organization/About'
-import Donate from './Organization/Donate'
-import Events from './Organization/Events'
-import Contact from './Organization/Contact'
-import Volunteer from './Organization/Volunteer'
-import SetUp from './SetUp';
+import Home from './GeneralPages/Home'
+import About from './OrgSpecific/About'
+import Donate from './OrgSpecific/Donate'
+import Events from './OrgSpecific/Events'
+import Contact from './OrgSpecific/Contact'
+import Volunteer from './OrgSpecific/Volunteer'
+import Register from './Forms/Register';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -73,7 +73,7 @@ export default function Routing() {
               <Link className={classes.tabs} to="/volunteer">Volunteer</Link>
             </Button>
             <IconButton className={classes.menuButton}>
-            <Link to="/signup"><AccountCircle className={classes.menuButton}/></Link>
+            <Link to="/register"><AccountCircle className={classes.menuButton}/></Link>
             </IconButton>
           </Toolbar>
 
@@ -96,20 +96,23 @@ export default function Routing() {
           <Route path="/contact">
             <Contact/>
           </Route>
-          <Route path="/signup">
-            <SetUp/>
+          <Route path="/register">
+            <Register/>
           </Route>
+          <Route path="/org/:orgName" children={<Child />} />
         </Switch>
       </AppBar>    
-        
 
-          
       </div>
     </Router>
-      
-      
     </div>
+  );
+}
 
-      
+function Child() {
+  let { orgName } = useParams();
+
+  return (
+    <About name={orgName} />
   );
 }

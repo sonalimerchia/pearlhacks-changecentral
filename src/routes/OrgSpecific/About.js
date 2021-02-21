@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import {getOrgInfo} from '../../utils/getOrgInfo';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -15,16 +16,25 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-const About = () => {
+const About = (props) => {
     const classes = useStyles();
+    const [info, setInfo] = useState();
+
+    useEffect(async () => {
+        const response = await getOrgInfo(props.name);
+        const result = response.data;
+        setInfo(result);
+    },[]);
+
     return (
         <div className={`About`, classes.root}>
             <Container>
               <div>
-                <h1>About Organization</h1>
+                <h1>{info.name}</h1>
                 <Paper className={classes.paper}>
-                    <h2>Org name</h2>
-                    <p>Hey! bio here</p>
+                    <Grid>
+
+                    </Grid>
                 </Paper>
             </div>  
             </Container>

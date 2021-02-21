@@ -5,7 +5,7 @@ const passwordSchema = {
     orgID: String
 }
 
-const password = new mongoose.Schema(passwordSchema);
+const password = new mongooseDB.Schema(passwordSchema);
 module.exports = {
     PasswordResetSchema: passwordSchema, 
     PasswordReset: mongoose.model("PasswordReset", password)
