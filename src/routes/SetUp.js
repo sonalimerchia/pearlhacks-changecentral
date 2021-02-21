@@ -70,12 +70,20 @@ const useStyles = makeStyles((theme) => ({
     }
 
     const handleSubmit = () => {
-      axios.post('http://localhost:4000/register', {
-        data
+      var config = {
+        method: 'post',
+        url: 'http://localhost:4000/register',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
       })
-      .then((response) => {
-        console.log(response);
-      }, (error) => {
+      .catch(function (error) {
         console.log(error);
       });
     }
@@ -230,5 +238,5 @@ const useStyles = makeStyles((theme) => ({
           
       )
   }
-
-  export default SetUp
+  
+  export default SetUp;
