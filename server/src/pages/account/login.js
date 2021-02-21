@@ -7,12 +7,9 @@ module.exports = async function (req, res) {
     var user;
     if (req.body.username) {
         user = await Org.findOne({username: req.body.username});   
-    } else if (req.body.email) {
-        user = await Org.findOne({email: req.body.username});
     }
 
     if (user) {
-
         const pass = await argon2.verify(user.password, req.body.password);
         if (pass) {
             console.log("setting cookie:", user._id)
@@ -32,8 +29,8 @@ module.exports = async function (req, res) {
         }
     } else {
         res.send({
-            field: "email/username", 
-            message: "incorrect email/username"
+            field: "email", 
+            message: "incorrect email or username"
         });
         return null;
     }

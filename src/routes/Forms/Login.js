@@ -6,6 +6,7 @@ import {InputField, toErrorMap} from "./FormComponents";
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import {getOrgInfo} from '../../utils/getOrgInfo';
+import { COOKIE_NAME } from '../../constants';
 
 const Login = (props) => {
   const [orgName, setOrgName] = useState("");
@@ -20,12 +21,11 @@ const Login = (props) => {
       },
       data : values
     };
-    
-    console.log(values);
   
     try {
-      const response = await axios(config);
+      const response = await axios(config, {withCredentials: true});
       const result = response.data;
+      console.log("response: ", response);
       console.log("result: ", result);
       if (result.field) {
         return result;
@@ -37,25 +37,29 @@ const Login = (props) => {
 
   return (
     <Box mt={10}>
+      {orgName ? <Redirect push to={"/edit/"+orgName} /> : null }
     <Formik
-        initialValues={{email: '', username: '', password: ''}}
+        initialValues={{username: '', password: ''}}
         onSubmit={async (values, {setErrors}) => {
           const errors = await asyncValidate(values);
           setErrors(toErrorMap(errors));
           if (!errors) {
-            const org = await getOrgInfo(values.name);
+            var config = {
+              method: 'post',
+              url: 'http://localhost:4000/login',
+              headers: { 
+                'Content-Type': 'application/json', 
+              },
+              data : values
+            };
+            const response = await axios(config);
+            const org = response.data;
             setOrgName(org.name);
           }
         }}
       >
         {({ errors, isSubmitting, values, handleSubmit, handleChange }) => (
             <form onSubmit={handleSubmit}>
-              <InputField name='email'
-                          placeholder='email'
-                          type='email'
-                          onChange={handleChange}
-                          error={errors.email}
-                          label='Email' />
               <Box mt={4}>
                 <InputField name='username'
                             placeholder='username'
@@ -85,7 +89,6 @@ const Login = (props) => {
             </form>
         )}
       </Formik>
-      {orgName ? <Redirect push to={"/org/"+orgName} /> : null }
       </Box> 
   )
 }

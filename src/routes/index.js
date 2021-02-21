@@ -18,9 +18,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import Box from '@material-ui/core/Box';
 import Login from './Forms/Login';
+import EditMaster from './Edit/EditMaster';
 // import InputBase from '@material-ui/core/InputBase';
 // import SearchIcon from '@material-ui/icons/Search';
 
@@ -56,10 +56,11 @@ export default function Routing() {
         <div>
          <AppBar position="static" className={classes.appBar}> 
           <Toolbar className={classes.toolBar}>
+            <Box display='flex' flexGrow={1}>
             <Button >
               <Link className={classes.tabs} style={{fontSize: '1.2rem', fontWeight: 'bold'}} to="/">Change Central</Link>
             </Button>
-            <Button>
+            {/* <Button>
               <Link className={classes.tabs} to="/donate">Donate</Link>
             </Button>
             <Button>
@@ -70,13 +71,16 @@ export default function Routing() {
             </Button>
             <Button>
               <Link className={classes.tabs} to="/activities">Activities</Link>
-            </Button>
+            </Button> */}
+            </Box>
+            <Box display='flex-end' justifyContent='right'>
             <Button className={classes.menuButton}>
               <Link to="/register" className={classes.tabs}>Register</Link>
             </Button>
             <Button className={classes.menuButton}>
               <Link to="/login" className={classes.tabs}>Login</Link>
             </Button>
+            </Box>
           </Toolbar>
 
             <Switch>
@@ -90,6 +94,7 @@ export default function Routing() {
             <Login />
           </Route>
           <Route path="/org/:viewType/:orgName" children={<Child />} />
+          <Route path='/edit/:orgName' children={<EditChild />} />
         </Switch>
       </AppBar>    
 
@@ -110,4 +115,10 @@ function Child() {
     case "volunteer": return <Volunteer name={orgName}/>
     case "activities": return <Activities name={orgName} />
   }
+}
+
+function EditChild() {
+  console.log("determining org...");
+  let { orgName } = useParams();
+  return <EditMaster name={orgName}/>
 }
